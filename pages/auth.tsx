@@ -12,7 +12,6 @@ const Auth = () => {
   const [password, setPassword] = useState("");
 
   const [variant, setVariant] = useState("login");
-  const router = useRouter();
 
   const toggleVariant = useCallback(() => {
     setVariant((current) => (current === "login" ? "register" : "login"));
@@ -23,15 +22,12 @@ const Auth = () => {
       await signIn("credentials", {
         email,
         password,
-        redirect: false,
-        callbackUrl: "/",
+        callbackUrl: "/profiles",
       });
-
-      router.push("/");
     } catch (error) {
       console.log(error);
     }
-  }, [email, password, router]);
+  }, [email, password]);
 
   const register = useCallback(async () => {
     try {
@@ -101,7 +97,7 @@ const Auth = () => {
               <div
                 onClick={() => {
                   signIn("google", {
-                    callbackUrl: "/",
+                    callbackUrl: "/profiles",
                   });
                 }}
                 className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
@@ -111,7 +107,7 @@ const Auth = () => {
               <div
                 onClick={() => {
                   signIn("github", {
-                    callbackUrl: "/",
+                    callbackUrl: "/profiles",
                   });
                 }}
                 className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
